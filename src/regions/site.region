@@ -6,7 +6,6 @@
         {squarespace-headers}
     </head>
     <body id="{squarespace.page-id}" class="{squarespace.page-classes}">
-        <img src="../assets/landing/feature.jpg" />
         {squarespace.main-content}
         {squarespace-footers}
     </body>
