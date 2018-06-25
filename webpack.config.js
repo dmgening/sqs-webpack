@@ -72,18 +72,18 @@ module.exports = {
         path: package.build,
         publicPath: '/'
     },
-    optimization: {
-        splitChunks: {
-            chunks: 'all',
-            automaticNameDelimiter: '.',
-            cacheGroups: {
-                vendors: {
-                    test: /[\\/]node_modules[\\/]/,
-                    priority: -10
-                }
-            }
-        }
-    },
+    // optimization: {
+    //     splitChunks: {
+    //         chunks: 'all',
+    //         automaticNameDelimiter: '.',
+    //         cacheGroups: {
+    //             vendors: {
+    //                 test: /[\\/]node_modules[\\/]/,
+    //                 priority: -10
+    //             }
+    //         }
+    //     }
+    // },
     plugins: [
         new CleanPlugin([package.build], {exclude: ".git"}),
         new ExtractTextPlugin({

@@ -1,0 +1,48 @@
+<div class="tm-navbar-wrapper">
+    <div uk-sticky="animation: uk-animation-slide-top; top: 100;
+                    sel-target: .uk-navbar-container;
+                    cls-inactive: uk-navbar-transparent;
+                    cls-active: uk-navbar-sticky;">
+
+        <nav class="tm-navbar-container uk-navbar-container">
+
+            <div class="uk-container">
+                <div uk-navbar>
+
+                    <div class="uk-navbar-left">
+                        <a class="uk-navbar-item uk-logo" href="/">LOGO</a>
+                    </div>
+
+                    <div class="uk-navbar-right">
+                        <ul class="uk-navbar-nav">
+
+                            {.repeated section items}
+                            <li class="{.if active}uk-active{.or}{.if folderActive}uk-active{.end}{.end}">
+                                <a href="{collection.fullUrl}">{collection.navigationTitle}</a>
+
+                                {.folder?}
+                                <div class="uk-navbar-dropdown">
+                                    <ul class="uk-nav uk-navbar-dropdown-nav">
+
+                                        {.repeated section collection.items}
+                                        <li class="{.if active}uk-active{.end}">
+                                            <a href="{collection.fullUrl}">{collection.navigationTitle}</a>
+                                        </li>
+                                        {.end}
+
+                                    </ul>
+                                </div>
+                                {.end}
+
+                            </li>
+                            {.end}
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+        </nav>
+    </div>
+</div>

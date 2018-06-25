@@ -6,6 +6,7 @@
         {squarespace-headers}
     </head>
     <body id="{squarespace.page-id}" class="{squarespace.page-classes}">
+        <squarespace:navigation navigationId="primary-nav" template="navigation" />
         {squarespace.main-content}
         {squarespace-footers}
     </body>

@@ -5,12 +5,10 @@
     "main": "index.js",
     "scripts": {
         "build": "webpack",
+        "watch": "webpack --watch",
+        "start": "squarespace runserver --auth",
         "build:production": "NODE_ENV=production npm run build",
-        "server": "squarespace runserver",
-        "server:auth": "squarespace runserver --auth",
-        "start": "npm run server & webpack --watch",
-        "start:auth": "npm run server:auth & webpack --watch",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "watch:production": "NODE_ENV=production npm run watch"
     },
     "author": "",
     "license": "ISC",
