@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="initial-scale=1">
+        {squarespace-headers}
+    </head>
+    <body id="{squarespace.page-id}" class="{squarespace.page-classes}">
+        <img src="../assets/landing/feature.jpg" />
+        {squarespace.main-content}
+        {squarespace-footers}
+    </body>
+</html>

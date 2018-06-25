@@ -1,0 +1,9 @@
+.DS_Store
+sftp-config.json
+npm-debug.log
+build/
+
+node_modules
+
+.npmrc
+.env
