@@ -5,7 +5,7 @@ const path = require('path'),
       webpack = require('webpack'),
       CleanPlugin = require('clean-webpack-plugin'),
       ExtractTextPlugin = require('extract-text-webpack-plugin'),
-      CopyWebpackPlugin = require('copy-webpack-plugin')
+      HTMLPlugin = require('html-webpack-plugin')
 
 
 const isProduction = process.env.NODE_ENV === 'production',
@@ -23,14 +23,10 @@ const rules = [{
         loader: `file-loader?context=${package.src}&name=[path][name].[ext]`
     },{
         exclude: /\.conf$'/,
-        include: ['regions', 'blocks',
-                  'pages', 'collections'].map(d => path.resolve(package.src, d)),
+        include: ['blocks', 'pages', 'collections'].map(d => path.resolve(package.src, d)),
         use: [{loader: "file-loader",
                options: { context: package.src,
-                          name (file) {
-                              if (/\/regions\//.test(file)) return "[name].[ext]"
-                              return "[path][name].[ext]"
-                          }}
+                          name: "[path][name].[ext]" }
               },{
                   loader: "extract-loader"
               },{
@@ -63,6 +59,7 @@ const rules = [{
     }]
 }]
 
+
 module.exports = {
     mode: isProduction ? 'production' : 'development',
     devtool: isProduction ? false : 'source-map',
@@ -71,17 +68,10 @@ module.exports = {
         app: path.resolve(package.src, 'index.js')
     },
     output: {
-        filename: 'scripts/[id].[chunkhash:8].js',
+        filename: 'assets/js/[id].[chunkhash:8].js',
         path: package.build,
         publicPath: '/'
     },
-    plugins: [
-        new CleanPlugin([package.build], {exclude: ".git"}),
-        new ExtractTextPlugin({
-            filename: 'styles/[id].[chunkhash:8].css',
-            allChunks: true
-        }),
-    ],
     optimization: {
         splitChunks: {
             chunks: 'all',
@@ -93,5 +83,19 @@ module.exports = {
                 }
             }
         }
-    }
+    },
+    plugins: [
+        new CleanPlugin([package.build], {exclude: ".git"}),
+        new ExtractTextPlugin({
+            filename: 'assets/css/[id].[chunkhash:8].css',
+            allChunks: true
+        }),
+        ...glob.sync(path.resolve(package.src, 'regions', '*')).map(
+            dir => new HTMLPlugin({
+                filename: path.basename(dir),
+                template: `!!html-loader!${path.relative(package.root, dir)}`,
+                inject: true
+            })
+        )
+    ]
 }
